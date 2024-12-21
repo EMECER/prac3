@@ -8,6 +8,7 @@ public class VehicleID {
         if (receivedId.length != 4){
             throw new NotCorrectFormatException("El formato del id del vehículo es de 4 números");
         }
+
         this.id = receivedId;
     }
 }
