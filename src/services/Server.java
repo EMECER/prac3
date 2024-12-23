@@ -1,5 +1,9 @@
 package services;
 
+import data.*;
+import micromobility.*;
+import services.exceptions.*;
+
 import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.time.LocalDateTime;
