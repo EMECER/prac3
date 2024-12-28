@@ -13,7 +13,8 @@ import java.time.LocalDateTime;
 /**
  * Clase JourneyRealizeHandler
  * Controladora del caso de uso Realizar desplazamiento.
- */
+ * */
+
 public class JourneyRealizeHandler {
     // Dependencias inyectadas
     private final Server server;
@@ -31,6 +32,7 @@ public class JourneyRealizeHandler {
      * @param qrDecoder Instancia del decodificador de QR
      * @param arduino Instancia del microcontrolador Arduino
      */
+
     public JourneyRealizeHandler(Server server, QRDecoder qrDecoder, ArduinoMicroController arduino) {
         this.server = server;
         this.qrDecoder = qrDecoder;
@@ -151,3 +153,5 @@ public class JourneyRealizeHandler {
         return distance / (duration.toMinutes() * 60);
     }
 }
+
+*/

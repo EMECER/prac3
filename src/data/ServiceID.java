@@ -6,9 +6,9 @@ package data;
 public final class ServiceID {
     private final String id;
 
-    public ServiceID(String id) {
+    public ServiceID(String id) throws NotCorrectFormatException {
         if (id == null || id.isEmpty()) {
-            throw new IllegalArgumentException("ServiceID no puede ser nulo o vacío");
+            throw new NotCorrectFormatException("ServiceID no puede ser nulo o vacío");
         }
         this.id = id;
     }
