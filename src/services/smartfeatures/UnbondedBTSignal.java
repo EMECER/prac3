@@ -1,7 +1,16 @@
 package services.smartfeatures;
+
+import java.net.ConnectException;
+
 /**
- * External services involved in the functioning of some features
+ * Interfaz para emitir el ID de la estación a través de Bluetooth.
  */
-public interface UnbondedBTSignal { // Broadcasts the station ID by BT
-    void BTbroadcast () throws ConnectException5;
+public interface UnbondedBTSignal {
+
+    /**
+     * Emite el ID de la estación a través de Bluetooth.
+     *
+     * @throws ConnectException si ocurre un problema de conexión.
+     */
+    void btBroadcast() throws ConnectException;
 }

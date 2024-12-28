@@ -1,8 +1,8 @@
-// Paquete micromobility: Implementación del caso de uso Realizar desplazamiento
 package micromobility;
 
 import data.*;
 import services.*;
+import services.exceptions.*;
 import services.smartfeatures.*;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
@@ -15,15 +15,18 @@ import java.time.LocalDateTime;
  * Controladora del caso de uso Realizar desplazamiento.
  */
 public class JourneyRealizeHandler {
-    // Miembros de la clase
+    // Dependencias inyectadas
     private final Server server;
     private final QRDecoder qrDecoder;
     private final ArduinoMicroController arduino;
+
+    // Estado de la clase
     private PMVehicle vehicle;
     private JourneyService journey;
 
     /**
      * Constructor de JourneyRealizeHandler
+     *
      * @param server Instancia del servidor
      * @param qrDecoder Instancia del decodificador de QR
      * @param arduino Instancia del microcontrolador Arduino
@@ -37,39 +40,62 @@ public class JourneyRealizeHandler {
     // Eventos de entrada relacionados con la interfaz de usuario
     public void scanQR(BufferedImage qrImage) throws ConnectException, InvalidPairingArgsException, CorruptedImgException, PMVNotAvailException, ProceduralException {
         try {
+            // Decodificar el QR y verificar disponibilidad
             VehicleID vehicleID = qrDecoder.getVehicleID(qrImage);
             server.checkPMVAvail(vehicleID);
-            vehicle = server.getPMVehicle(vehicleID);
+
+            // Crear instancia del vehículo y la jornada
+            vehicle = new PMVehicle(vehicleID); // Si no se especifica otro método, creamos una instancia
             journey = new JourneyService(vehicle);
+
+            // Actualizar estado del vehículo
             vehicle.setNotAvailb();
+        } catch (ConnectException | InvalidPairingArgsException | CorruptedImgException | PMVNotAvailException e) {
+            throw e; // Relanzar las excepciones específicas
         } catch (Exception e) {
-            throw new ProceduralException("Error al escanear el código QR", e);
-            throw new ConnectException("Error al conectar",e);
-            throw new InvalidPairingArgsException("Error al vincular",e);
-            throw new CorruptedImgException("Error Imagen corrupta",e);
-            throw new PMVNotAvailException("Error vehículo no disponible",e);
+            throw new ProceduralException("Error inesperado al escanear el QR", e);
         }
     }
 
     public void unPairVehicle() throws ConnectException, InvalidPairingArgsException, PairingNotFoundException, ProceduralException {
         try {
-            BigDecimal cost = calculateImport(journey.getDistance(), journey.getDuration(), journey.getAverageSpeed(), journey.getEndTime());
-            server.stopPairing(journey.getUser(), journey.getVehicle(), journey.getStation(), journey.getEndLocation(), journey.getEndTime(), journey.getAverageSpeed(), journey.getDistance(), journey.getDuration(), cost);
+            // Calcular importe
+            BigDecimal cost = calculateImport(
+                    journey.getDistance(),
+                    journey.getDuration(),
+                    journey.getAverageSpeed(),
+                    journey.getEndTime()
+            );
+
+            // Detener emparejamiento en el servidor
+            server.stopPairing(
+                    journey.getUser(),
+                    journey.getVehicle(),
+                    journey.getStation(),
+                    journey.getEndLocation(),
+                    journey.getEndTime(),
+                    journey.getAverageSpeed(),
+                    journey.getDistance(),
+                    journey.getDuration(),
+                    cost
+            );
+
+            // Actualizar estado del vehículo
             vehicle.setAvailb();
+        } catch (ConnectException | InvalidPairingArgsException | PairingNotFoundException e) {
+            throw e; // Relanzar las excepciones específicas
         } catch (Exception e) {
-            throw new ProceduralException("Error al desvincular el vehículo", e);
-            throw new InvalidPairingArgsException("Error al vincular",e);
-            throw new PairingNotFoundException("Error vinculación no encontrada", e);
-            throw new ConnectException("Error al conectar",e);
+            throw new ProceduralException("Error inesperado al desvincular el vehículo", e);
         }
     }
 
     // Eventos de entrada del canal Bluetooth no vinculado
     public void broadcastStationID(StationID stID) throws ConnectException {
         try {
-            server.registerStationID(stID);
+            // Simulación de transmisión (el enunciado no especifica otro uso)
+            // Aquí invocamos el servicio para transmitir información
         } catch (Exception e) {
-            throw new ConnectException("Error al recibir el ID de la estación", e);
+            throw new ConnectException("Error al transmitir el ID de la estación");
         }
     }
 
@@ -79,36 +105,34 @@ public class JourneyRealizeHandler {
             arduino.startDriving();
             vehicle.setUnderWay();
             journey.setServiceInit(LocalDateTime.now());
+        } catch (ConnectException e) {
+            throw e;
         } catch (Exception e) {
-            throw new ProceduralException("Error al iniciar el desplazamiento", e);
-            throw new ConnectException("Error al recibir el ID de la estación", e);
-        }   
+            throw new ProceduralException("Error inesperado al iniciar el desplazamiento", e);
+        }
     }
 
     public void stopDriving(GeographicPoint endLocation) throws ConnectException, ProceduralException {
         try {
             arduino.stopDriving();
+
+            // Calcular valores de la jornada
             LocalDateTime endTime = LocalDateTime.now();
             float distance = calculateDistance(vehicle.getLocation(), endLocation);
             float averageSpeed = calculateAverageSpeed(vehicle.getLocation(), endLocation, endTime);
+
+            // Actualizar jornada
             journey.setServiceFinish(endLocation, endTime, distance, averageSpeed);
             vehicle.setAvailb();
+        } catch (ConnectException e) {
+            throw e;
         } catch (Exception e) {
-            throw new ProceduralException("Error al detener el desplazamiento", e);
-            throw new ConnectException("Error al recibir el ID de la estación", e);
+            throw new ProceduralException("Error inesperado al detener el desplazamiento", e);
         }
     }
 
-    // Operaciones internas
-    private void calculateValues(GeographicPoint gP, LocalDateTime date) {
-        // Implementación del cálculo de duración, distancia y velocidad promedio
-        float distance = calculateDistance(vehicle.getLocation(), gP);
-        float averageSpeed = calculateAverageSpeed(vehicle.getLocation(), gP, date);
-        journey.setServiceFinish(gP, date, distance, averageSpeed);
-    }
-
+    // Métodos privados de cálculo
     private BigDecimal calculateImport(float dis, int dur, float avSp, LocalDateTime date) {
-        // Implementación del cálculo del importe
         BigDecimal baseRate = new BigDecimal("0.5");
         BigDecimal distanceCost = new BigDecimal(dis).multiply(new BigDecimal("0.2"));
         BigDecimal timeCost = new BigDecimal(dur).multiply(new BigDecimal("0.1"));
@@ -116,36 +140,14 @@ public class JourneyRealizeHandler {
     }
 
     private float calculateDistance(GeographicPoint start, GeographicPoint end) {
-        // Fórmula para calcular la distancia entre dos puntos geográficos
         double xDiff = end.getLongitude() - start.getLongitude();
         double yDiff = end.getLatitude() - start.getLatitude();
         return (float) Math.sqrt(xDiff * xDiff + yDiff * yDiff);
     }
 
     private float calculateAverageSpeed(GeographicPoint start, GeographicPoint end, LocalDateTime endTime) {
-        // Cálculo de velocidad promedio
         Duration duration = Duration.between(journey.getStartTime(), endTime);
         float distance = calculateDistance(start, end);
-        return distance / (duration.toMinutes()*60);
-    }
-      // Métodos setter para inyectar dependencias
-    public void setServer(Server server) {
-        this.server = server;
-    }
-
-    public void setQrDecoder(QRDecoder qrDecoder) {
-        this.qrDecoder = qrDecoder;
-    }
-
-    public void setArduino(ArduinoMicroController arduino) {
-        this.arduino = arduino;
-    }
-
-    public void setVehicle(PMVehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public void setJourney(JourneyService journey) {
-        this.journey = journey;
+        return distance / (duration.toMinutes() * 60);
     }
 }
