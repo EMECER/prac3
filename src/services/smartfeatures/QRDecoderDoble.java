@@ -1,5 +1,6 @@
 package services.smartfeatures;
 
+import data.GeographicPoint;
 import micromobility.PMVehicle;
 import services.exceptions.NotCorrectFormatException;
 import data.VehicleID;
@@ -14,7 +15,7 @@ public class QRDecoderDoble implements QRDecoderInterface{
     }
 
     @Override
-    public PMVehicle getVehicle(BufferedImage qrImage) {
-        return null;
+    public PMVehicle getVehicle(BufferedImage qrImage) throws NotCorrectFormatException {
+        return new PMVehicle(new VehicleID(1234), new GeographicPoint(0, 0));
     }
 }

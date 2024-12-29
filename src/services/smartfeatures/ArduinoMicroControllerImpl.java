@@ -10,6 +10,8 @@ public class ArduinoMicroControllerImpl implements ArduinoMicroControllerInterfa
     private boolean isDriving;
 
     public ArduinoMicroControllerImpl(){
+        isBtConnected = false;
+        isDriving = false;
     }
     @Override
     public void setBtConnection() throws ConnectException {

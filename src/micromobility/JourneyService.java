@@ -14,7 +14,7 @@ public class JourneyService implements  JourneyServiceInterface{
     // Atributos según el Modelo del Dominio
 
     private UserAccount user;
-    private PMVehicle vehicle;
+    private PMVInterface vehicle;
     private GeographicPoint startLocation;
     private GeographicPoint endLocation;
     private LocalDateTime startTime;
@@ -30,7 +30,7 @@ public class JourneyService implements  JourneyServiceInterface{
      * @param vehicle El vehículo utilizado
      *
      */
-    public JourneyService(UserAccount user, PMVehicle vehicle) {
+    public JourneyService(UserAccount user, PMVInterface vehicle) {
         this.user = user;
         this.vehicle = vehicle;
         this.startLocation = vehicle.getLocation();

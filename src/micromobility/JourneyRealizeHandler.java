@@ -36,7 +36,7 @@ public class JourneyRealizeHandler implements JourneyRealizeHandlerInterface {
      * @param arduino Instancia del microcontrolador Arduino
      */
 
-    public JourneyRealizeHandler(ServerInterface server, QRDecoder qrDecoder, ArduinoMicroControllerInterface arduino) {
+    public JourneyRealizeHandler(ServerInterface server, QRDecoderInterface qrDecoder, ArduinoMicroControllerInterface arduino) {
         this.server = server;
         this.qrDecoder = qrDecoder;
         this.arduino = arduino;
@@ -50,10 +50,12 @@ public class JourneyRealizeHandler implements JourneyRealizeHandlerInterface {
         if (server.getState().equals("Down")){
             throw new ConnectException("El servidor actualmente está caído");
         }
+
+
         try {
             step++;
             // Decodificar el QR y verificar disponibilidad
-            PMVehicle vehicle = qrDecoder.getVehicle(qrImage);
+            this.vehicle = qrDecoder.getVehicle(qrImage);
             VehicleID id = vehicle.getId();
             server.checkPMVAvail(id);
 
@@ -96,12 +98,12 @@ public class JourneyRealizeHandler implements JourneyRealizeHandlerInterface {
         try {
             step++;
             arduino.startDriving();
-            vehicle.setUnderWay();
+            this.vehicle.setUnderWay();
             journey.setServiceInit(LocalDateTime.now());
         } catch (ConnectException e) {
             throw e;
-        } catch (Exception e) {
-            throw new ProceduralException("Error inesperado al iniciar el desplazamiento");
+        } catch (PMVPhisicalException e) {
+            throw new RuntimeException(e);
         }
     }
     @Override
@@ -184,6 +186,14 @@ public class JourneyRealizeHandler implements JourneyRealizeHandlerInterface {
         Duration duration = Duration.between(journey.getStartTime(), endTime);
         float distance = calculateDistance(start, end);
         return distance / (duration.toMinutes() * 60);
+    }
+
+    public PMVehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicleStatus(PMVehicle.PMVState status){
+        this.vehicle.setState(status);
     }
 }
 
