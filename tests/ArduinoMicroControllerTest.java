@@ -16,11 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class ArduinoMicroControllerTest {
 
-    ArduinoMicroController toTest;
+    ArduinoMicroControllerImpl toTest;
 
     @BeforeEach
     public void setUp() {
-        toTest = new ArduinoMicroController(false, false);
+        toTest = new ArduinoMicroControllerImpl();
+        toTest.setDriving(false);
+        toTest.setBtConnected(false);
     }
     /**
      * Prueba exitosa para establecer una conexión Bluetooth.

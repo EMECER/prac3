@@ -5,13 +5,11 @@ import services.exceptions.ProceduralException;
 
 import java.net.ConnectException;
 
-public class ArduinoMicroController implements ArduinoMicroControllerInterface {
+public class ArduinoMicroControllerImpl implements ArduinoMicroControllerInterface{
     private boolean isBtConnected;
     private boolean isDriving;
 
-    public ArduinoMicroController(boolean connected, boolean driving){
-        this.isBtConnected = connected;
-        this.isDriving = driving;
+    public ArduinoMicroControllerImpl(){
     }
     @Override
     public void setBtConnection() throws ConnectException {
@@ -52,7 +50,13 @@ public class ArduinoMicroController implements ArduinoMicroControllerInterface {
     public boolean getConnection(){
         return this.isBtConnected;
     }
-    public boolean getDrive(){
-        return this.isDriving;
+    public boolean getDrive(){ return this.isDriving; }
+
+    public void setBtConnected(boolean state){
+        this.isBtConnected = state;
+    }
+
+    public void setDriving(boolean state){
+        this.isDriving = state;
     }
 }

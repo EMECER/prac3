@@ -94,8 +94,7 @@ public class JourneyRealizeHandler {
     // Eventos de entrada del canal Bluetooth no vinculado
     public void broadcastStationID(StationID stID) throws ConnectException {
         try {
-            // Simulación de transmisión (el enunciado no especifica otro uso)
-            // Aquí invocamos el servicio para transmitir información
+            UnbondedBTSignalInterface toRun = new UnbondedBTSingnalImpl(this, stID);
         } catch (Exception e) {
             throw new ConnectException("Error al transmitir el ID de la estación");
         }
@@ -153,4 +152,5 @@ public class JourneyRealizeHandler {
         return distance / (duration.toMinutes() * 60);
     }
 }
+
 
