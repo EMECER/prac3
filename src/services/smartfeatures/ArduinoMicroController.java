@@ -5,11 +5,11 @@ import services.exceptions.ProceduralException;
 
 import java.net.ConnectException;
 
-public class ArduinoMicroControllerDoble implements ArduinoMicroControllerInterface {
+public class ArduinoMicroController implements ArduinoMicroControllerInterface {
     private boolean isBtConnected;
     private boolean isDriving;
 
-    public ArduinoMicroControllerDoble(boolean connected, boolean driving){
+    public ArduinoMicroController(boolean connected, boolean driving){
         this.isBtConnected = connected;
         this.isDriving = driving;
     }
