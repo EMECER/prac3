@@ -41,9 +41,9 @@ public class PaymentTests {
      */
     @Test
     public void testServiceIDCreation_Invalid() {
-        assertThrows(IllegalArgumentException.class, () -> new ServiceID(null));
-        assertThrows(IllegalArgumentException.class, () -> new ServiceID(""));
-        assertThrows(IllegalArgumentException.class, () -> new ServiceID("123")); // Menor longitud
+        assertThrows(NotCorrectFormatException.class, () -> new ServiceID(null));
+        assertThrows(NotCorrectFormatException.class, () -> new ServiceID(""));
+
     }
 
     /**

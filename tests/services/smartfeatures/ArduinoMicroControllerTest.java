@@ -38,6 +38,7 @@ public class ArduinoMicroControllerTest {
      */
     @Test
     public void testSetBtConnection_AlreadyConnected() throws ConnectException {
+        toTest.setBtConnection();
         assertThrows(ConnectException.class , () -> toTest.setBtConnection());
     }
 
@@ -47,7 +48,7 @@ public class ArduinoMicroControllerTest {
     @Test
     public void testStartDriving_Success() throws ConnectException, PMVPhisicalException, ProceduralException {
         toTest.setBtConnection(); // Necesario para poder conducir
-        assertDoesNotThrow(() -> toTest.startDriving());
+        toTest.startDriving();
         assertTrue(toTest.getDrive(), "El vehículo debería estar en movimiento.");
     }
 
@@ -65,6 +66,7 @@ public class ArduinoMicroControllerTest {
     @Test
     public void testStartDriving_AlreadyDriving() throws ConnectException, PMVPhisicalException, ProceduralException {
         toTest.setBtConnection();
+        toTest.startDriving();
         assertThrows(ProceduralException.class, () ->  toTest.startDriving());
     }
 

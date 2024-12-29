@@ -2,7 +2,7 @@ package data;
 
 import services.exceptions.NotCorrectFormatException;
 
-public class VehicleID {
+public class VehicleID implements VehicleIDInterface {
     //formato del id: 4 números (como una matrícula pero sin letras)
     private int id;
 
@@ -12,5 +12,9 @@ public class VehicleID {
         }
 
         this.id = receivedId;
+    }
+    @Override
+    public int getId() {
+        return id;
     }
 }

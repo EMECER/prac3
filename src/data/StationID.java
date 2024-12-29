@@ -1,8 +1,9 @@
 package data;
 
+import org.intellij.lang.annotations.Identifier;
 import services.exceptions.NotCorrectFormatException;
 
-public class StationID {
+public class StationID implements StationIDInterface{
 
     //Formato: letra del barrio + número de 3 dígitos (inspiración en matrículas antiguas). Por ejemplo: P001 (pardinyes, estación1)
     private String id;
@@ -42,6 +43,11 @@ public class StationID {
         } catch (NullPointerException e) {
             throw new NotCorrectFormatException("La id recibida es null");
         }
+    }
+
+    @Override
+    public String getId(){
+        return this.id;
     }
 
     private boolean exisits(char receivedBarri) {

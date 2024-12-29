@@ -1,10 +1,8 @@
 package micromobility;
 
-import data.GeographicPoint;
-import data.StationID;
-import data.UserAccount;
-import data.VehicleID;
+import data.*;
 
+import java.net.ConnectException;
 import java.time.LocalDateTime;
 
 public interface JourneyServiceInterface {
@@ -23,6 +21,8 @@ public interface JourneyServiceInterface {
     public LocalDateTime getStartTime();
 
     public LocalDateTime getEndTime();
+
+   ;
 
     public float getDistance();
 

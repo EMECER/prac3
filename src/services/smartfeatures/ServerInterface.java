@@ -85,4 +85,6 @@ public interface ServerInterface {
      * @param st el ID de la estación.
      */
     void registerLocation(VehicleID veh, StationID st);
+
+    String getState();
 }
