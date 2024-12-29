@@ -1,8 +1,8 @@
-package micromobility.payment;
+package services.exceptions;
 /**
  * Excepción que indica que no hay suficiente saldo en el monedero.
  */
-class NotEnoughWalletException extends Exception {
+public class NotEnoughWalletException extends Exception {
     public NotEnoughWalletException(String message) {
         super(message);
     }
