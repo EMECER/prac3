@@ -1,6 +1,6 @@
 package services.smartfeatures;
 
-import data.NotCorrectFormatException;
+import services.exceptions.NotCorrectFormatException;
 import data.VehicleID;
 import java.awt.image.BufferedImage;
 import services.exceptions.*;

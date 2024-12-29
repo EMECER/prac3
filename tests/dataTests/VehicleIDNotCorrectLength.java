@@ -1,6 +1,6 @@
 package dataTests;
 
-import data.NotCorrectFormatException;
+import services.exceptions.NotCorrectFormatException;
 import data.VehicleID;
 import org.junit.jupiter.api.Test;
 

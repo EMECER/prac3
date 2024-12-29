@@ -1,7 +1,7 @@
 package services.smartfeatures;
 
-import data.NotCorrectFormatException;
-import data.PMVehicle;
+import services.exceptions.NotCorrectFormatException;
+import micromobility.PMVehicle;
 import data.VehicleID;
 import services.exceptions.CorruptedImgException;
 
@@ -28,10 +28,10 @@ public class QRDecoder implements QRDecoderInterface {
 
         try {
             // Simulación de decodificación del QR para obtener el VehicleID
-            int[] idArray = new int[]{1, 2, 3, 4}; // Supongamos que decodificamos un ID válido
-            return new VehicleID(idArray);
+            int id = 1234; // Supongamos que decodificamos un ID válido
+            return new VehicleID(id);
         } catch (Exception e) {
-            throw new CorruptedImgException("Error al procesar la imagen del QR.", e);
+            throw new CorruptedImgException("Error al procesar la imagen del QR.");
         }
     }
 
@@ -47,6 +47,6 @@ public class QRDecoder implements QRDecoderInterface {
         VehicleID vehicleID = getVehicleID(qrImage);
 
         // Crear un PMVehicle basado en el ID decodificado
-        return new PMVehicle(vehicleID);
+        return new PMVehicle(vehicleID, );
     }
 }

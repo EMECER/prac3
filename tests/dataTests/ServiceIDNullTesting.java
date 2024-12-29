@@ -1,8 +1,7 @@
 package dataTests;
 
-import data.NotCorrectFormatException;
+import services.exceptions.NotCorrectFormatException;
 import data.ServiceID;
-import dataTests.DataNotCorrectInit;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

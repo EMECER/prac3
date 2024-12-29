@@ -34,7 +34,7 @@ public class JourneyRealizeHandler {
      * @param arduino Instancia del microcontrolador Arduino
      */
 
-    public JourneyRealizeHandler(ServerInterface server, QRDecoderInterface qrDecoder, ArduinoMicroControllerInterface arduino) {
+    public JourneyRealizeHandler(ServerInterface server, QRDecoder qrDecoder, ArduinoMicroControllerInterface arduino) {
         this.server = server;
         this.qrDecoder = qrDecoder;
         this.arduino = arduino;

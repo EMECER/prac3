@@ -1,6 +1,6 @@
 package services.smartfeatures;
 
-import data.NotCorrectFormatException;
+import services.exceptions.NotCorrectFormatException;
 import data.VehicleID;
 import services.exceptions.CorruptedImgException;
 

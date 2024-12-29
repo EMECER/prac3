@@ -1,8 +1,7 @@
 package dataTests;
 
 import data.GeographicPoint;
-import data.NotCorrectFormatException;
-import data.ServiceID;
+import services.exceptions.NotCorrectFormatException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;

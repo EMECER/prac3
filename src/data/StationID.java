@@ -1,5 +1,7 @@
 package data;
 
+import services.exceptions.NotCorrectFormatException;
+
 public class StationID {
 
     //Formato: letra del barrio + número de 3 dígitos (inspiración en matrículas antiguas). Por ejemplo: P001 (pardinyes, estación1)

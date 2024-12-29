@@ -1,6 +1,6 @@
 package services.smartfeatures;
 
-import data.NotCorrectFormatException;
+import services.exceptions.NotCorrectFormatException;
 import data.PMVehicle;
 import data.VehicleID;
 import org.junit.jupiter.api.BeforeEach;

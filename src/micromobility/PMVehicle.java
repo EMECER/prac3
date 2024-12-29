@@ -17,10 +17,9 @@ public class PMVehicle {
 
     private VehicleID id;
 
-    public PMVehicle(PMVState initialState, GeographicPoint initialLocation, VehicleID ReceivedId) {
-        this.id = ReceivedId;
-        this.state = initialState;
-        this.location = initialLocation;
+    public PMVehicle(VehicleID id, GeographicPoint location) {
+        this.id = id;
+        this.location = location;
     }
 
     public PMVState getState() {
