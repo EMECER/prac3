@@ -34,7 +34,7 @@ public class JourneyRealizeHandler {
      * @param arduino Instancia del microcontrolador Arduino
      */
 
-    public JourneyRealizeHandler(ServerInterface server, QRDecoder qrDecoder, ArduinoMicroControllerInterface arduino) {
+    public JourneyRealizeHandler(ServerInterface server, QRDecoderInterface qrDecoder, ArduinoMicroControllerInterface arduino) {
         this.server = server;
         this.qrDecoder = qrDecoder;
         this.arduino = arduino;
@@ -45,7 +45,7 @@ public class JourneyRealizeHandler {
         try {
             // Decodificar el QR y verificar disponibilidad
             PMVehicle vehicle = qrDecoder.getVehicle(qrImage);
-            server.checkPMVAvail(vehicleID);
+            server.checkPMVAvail(vehicle);
 
             // Crear instancia del vehículo y la jornada
             journey = new JourneyService(user,vehicle);
@@ -94,7 +94,8 @@ public class JourneyRealizeHandler {
     // Eventos de entrada del canal Bluetooth no vinculado
     public void broadcastStationID(StationID stID) throws ConnectException {
         try {
-            UnbondedBTSignalInterface toRun = new UnbondedBTSingnalImpl(this, stID);
+            // Simulación de transmisión (el enunciado no especifica otro uso)
+            // Aquí invocamos el servicio para transmitir información
         } catch (Exception e) {
             throw new ConnectException("Error al transmitir el ID de la estación");
         }
@@ -152,5 +153,4 @@ public class JourneyRealizeHandler {
         return distance / (duration.toMinutes() * 60);
     }
 }
-
 

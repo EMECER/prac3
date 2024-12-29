@@ -21,7 +21,9 @@ public class PMVehicle {
         this.id = id;
         this.location = location;
     }
-
+    public VehicleID getVehiclebyId(VehicleID id) {
+        return this.PMVehicle //suposem que hi ha una base de dades
+    }
     public PMVState getState() {
         return state;
     }

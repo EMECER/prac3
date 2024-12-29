@@ -47,6 +47,6 @@ public class QRDecoder implements QRDecoderInterface {
         VehicleID vehicleID = getVehicleID(qrImage);
 
         // Crear un PMVehicle basado en el ID decodificado
-        return new PMVehicle(vehicleID, );
+        return PMVehicle.getVehiclebyId(vehicleID);
     }
 }
