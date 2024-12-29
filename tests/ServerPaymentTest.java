@@ -48,7 +48,7 @@ public class ServerPaymentTest implements ServerPaymentInterface {
      */
     @Test
     public void testRegisterPayment_Success() {
-        ServiceID serviceID = new ServiceID("12345");
+        ServiceID serviceID = new ServiceID("1234");
         UserAccount user = new UserAccount("user@example.com");
         BigDecimal amount = new BigDecimal("25.50");
         char paymentMethod = 'C'; // 'C' para tarjeta de crédito

@@ -1,5 +1,7 @@
 package data;
 
+import services.exceptions.NotCorrectFormatException;
+
 /**
  * Representa el identificador único de un servicio.
  */

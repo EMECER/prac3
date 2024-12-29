@@ -1,16 +1,17 @@
 package dataTests;
 
+import data.GeographicPoint;
 import data.NotCorrectFormatException;
-import data.VehicleID;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class VehicleIDNotCorrectLength implements DataNotCorrectInit {
-    private VehicleID notCorrectLength;
+public class GeograpghicPointNotCorrectLongitude implements DataNotCorrectInit{
+    GeographicPoint toTest;
     @Override
     @Test
     public void checkThrows() throws NotCorrectFormatException {
-        assertThrows(NotCorrectFormatException.class, () -> notCorrectLength = new VehicleID(10000));
+        assertThrows(IllegalArgumentException.class, () -> toTest = new GeographicPoint(0, 4550));
     }
 }
+

@@ -1,5 +1,6 @@
 package services.smartfeatures;
 
+import data.NotCorrectFormatException;
 import data.VehicleID;
 import java.awt.image.BufferedImage;
 import services.exceptions.*;
@@ -16,5 +17,5 @@ public interface QRDecoderInterface {
      * @return el ID del vehículo decodificado.
      * @throws CorruptedImgException si la imagen está corrupta o no es legible.
      */
-    VehicleID getVehicleID(BufferedImage qrImage) throws CorruptedImgException;
+    VehicleID getVehicleID(BufferedImage qrImage) throws CorruptedImgException, NotCorrectFormatException;
 }
