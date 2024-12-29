@@ -4,6 +4,7 @@ import data.*;
 import org.junit.jupiter.api.*;
 import org.mockito.*;
 import services.*;
+import services.ServerInterface;
 import services.smartfeatures.*;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
@@ -16,26 +17,27 @@ import static org.mockito.Mockito.*;
 
 public class JourneyRealizeHandlerTest {
 
-    @Mock
-    private Server mockServer;
 
-    @Mock
-    private QRDecoder mockQRDecoder;
+    private ServerInterface mockServer;
 
-    @Mock
-    private ArduinoMicroController mockArduino;
 
-    @Mock
-    private PMVehicle mockVehicle;
+    private QRDecoderInterface mockQRDecoder;
 
-    @Mock
+
+    private ArduinoMicroControllerInterface mockArduino;
+
+    private PMVehicleInterface mockVehicle;
+
     private JourneyService mockJourneyService;
 
     private JourneyRealizeHandler handler;
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        mockServer = new ServerDoble();
+        mockQRDecoder = new QRDecoderDoble();
+        mockArduino  = new ArduinoMicroControllerDoble();
+
         handler = new JourneyRealizeHandler(mockServer, mockQRDecoder, mockArduino);
     }
 

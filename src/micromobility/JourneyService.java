@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * Clase JourneyService
  * Representa un trayecto realizado en el sistema de micromovilidad.
  */
-public class JourneyService {
+public class JourneyService implements  JourneyServiceInterface{
     // Atributos según el Modelo del Dominio
 
     private UserAccount user;

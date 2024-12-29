@@ -2,6 +2,7 @@ package micromobility;
 
 import data.*;
 import services.*;
+import services.ServerInterface;
 import services.exceptions.*;
 import services.smartfeatures.*;
 import java.awt.image.BufferedImage;
@@ -17,9 +18,9 @@ import java.time.LocalDateTime;
 
 public class JourneyRealizeHandler {
     // Dependencias inyectadas
-    private final Server server;
-    private final QRDecoder qrDecoder;
-    private final ArduinoMicroController arduino;
+    private final ServerInterface server;
+    private final QRDecoderInterface qrDecoder;
+    private final ArduinoMicroControllerInterface arduino;
 
     // Estado de la clase
     private PMVehicle vehicle;
@@ -33,7 +34,7 @@ public class JourneyRealizeHandler {
      * @param arduino Instancia del microcontrolador Arduino
      */
 
-    public JourneyRealizeHandler(Server server, QRDecoder qrDecoder, ArduinoMicroController arduino) {
+    public JourneyRealizeHandler(ServerInterface server, QRDecoderInterface qrDecoder, ArduinoMicroControllerInterface arduino) {
         this.server = server;
         this.qrDecoder = qrDecoder;
         this.arduino = arduino;
@@ -47,7 +48,7 @@ public class JourneyRealizeHandler {
             server.checkPMVAvail(vehicleID);
 
             // Crear instancia del vehículo y la jornada
-            vehicle = new PMVehicle(vehicleID); // Si no se especifica otro método, creamos una instancia
+            vehicle = vehicleID.getID()// Si no se especifica otro método, creamos una instancia
             journey = new JourneyService(vehicle);
 
             // Actualizar estado del vehículo
@@ -154,4 +155,3 @@ public class JourneyRealizeHandler {
     }
 }
 
-*/
