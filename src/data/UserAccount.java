@@ -6,4 +6,5 @@ public class UserAccount {
     public UserAccount (String username){
         this.username = username;
     }
+
 }
