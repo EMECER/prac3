@@ -9,7 +9,7 @@ import java.net.ConnectException;
 /**
  * Interfaz que gestiona la parte del pago en el sistema de micromovilidad, para evitar futuros code smells.
  */
-public interface ServerPayment {
+public interface ServerPaymentInterface {
 
     /**
      * Registra los detalles de un pago en el servidor.

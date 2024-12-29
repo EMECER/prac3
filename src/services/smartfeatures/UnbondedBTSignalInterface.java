@@ -5,7 +5,7 @@ import java.net.ConnectException;
 /**
  * Interfaz para emitir el ID de la estación a través de Bluetooth.
  */
-public interface UnbondedBTSignal {
+public interface UnbondedBTSignalInterface {
 
     /**
      * Emite el ID de la estación a través de Bluetooth.

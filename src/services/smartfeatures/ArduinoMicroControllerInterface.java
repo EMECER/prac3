@@ -6,7 +6,7 @@ import services.exceptions.*;
 /**
  * Interfaz para gestionar microcontroladores Arduino en el sistema de micromovilidad.
  */
-public interface ArduinoMicroController {
+public interface ArduinoMicroControllerInterface {
 
     /**
      * Establece una conexión Bluetooth.

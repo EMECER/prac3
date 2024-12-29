@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  * Interfaz que representa servicios externos en el sistema de micromovilidad compartida.
  * Proporciona métodos para verificar la disponibilidad de vehículos, registrar emparejamientos y actualizar ubicaciones.
  */
-public interface Server {
+public interface ServerInterface {
 
     /**
      * Verifica si un vehículo de movilidad personal (PMV) está disponible.
