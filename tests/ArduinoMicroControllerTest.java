@@ -22,11 +22,6 @@ public class ArduinoMicroControllerTest {
     public void setUp() {
         toTest = new ArduinoMicroController(false, false);
     }
-
-
-
-
-
     /**
      * Prueba exitosa para establecer una conexión Bluetooth.
      */
