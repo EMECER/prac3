@@ -34,7 +34,7 @@ public class JourneyRealizeHandler {
      * @param arduino Instancia del microcontrolador Arduino
      */
 
-    public JourneyRealizeHandler(ServerInterface server, QRDecoderInterface qrDecoder, ArduinoMicroControllerInterface arduino) {
+    public JourneyRealizeHandler(ServerInterface server, QRDecoder qrDecoder, ArduinoMicroControllerInterface arduino) {
         this.server = server;
         this.qrDecoder = qrDecoder;
         this.arduino = arduino;
@@ -45,17 +45,18 @@ public class JourneyRealizeHandler {
         try {
             // Decodificar el QR y verificar disponibilidad
             PMVehicle vehicle = qrDecoder.getVehicle(qrImage);
-            server.checkPMVAvail(vehicle);
+            VehicleID id = vehicle.getId();
+            server.checkPMVAvail(id);
 
             // Crear instancia del vehículo y la jornada
             journey = new JourneyService(user,vehicle);
 
             // Actualizar estado del vehículo
             vehicle.setNotAvailb();
-        } catch (ConnectException | InvalidPairingArgsException | CorruptedImgException | PMVNotAvailException e) {
-            throw e; // Relanzar las excepciones específicas
         } catch (Exception e) {
-            throw new ProceduralException("Error inesperado al escanear el QR", e);
+            throw (e); // Relanzar las excepciones específicas
+        } catch (NotCorrectFormatException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -84,10 +85,8 @@ public class JourneyRealizeHandler {
 
             // Actualizar estado del vehículo
             vehicle.setAvailb();
-        } catch (ConnectException | InvalidPairingArgsException | PairingNotFoundException e) {
-            throw e; // Relanzar las excepciones específicas
         } catch (Exception e) {
-            throw new ProceduralException("Error inesperado al desvincular el vehículo", e);
+            throw e; // Relanzar las excepciones específicas
         }
     }
 
@@ -110,7 +109,7 @@ public class JourneyRealizeHandler {
         } catch (ConnectException e) {
             throw e;
         } catch (Exception e) {
-            throw new ProceduralException("Error inesperado al iniciar el desplazamiento", e);
+            throw new ProceduralException("Error inesperado al iniciar el desplazamiento");
         }
     }
 
@@ -129,7 +128,7 @@ public class JourneyRealizeHandler {
         } catch (ConnectException e) {
             throw e;
         } catch (Exception e) {
-            throw new ProceduralException("Error inesperado al detener el desplazamiento", e);
+            throw new ProceduralException("Error inesperado al detener el desplazamiento");
         }
     }
 

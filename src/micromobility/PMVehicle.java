@@ -1,6 +1,6 @@
 // Paquete micromobility: Implementación del caso de uso Realizar desplazamiento
 package micromobility;
-
+import micromobility.*;
 import data.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -22,7 +22,7 @@ public class PMVehicle {
         this.location = location;
     }
     public VehicleID getVehiclebyId(VehicleID id) {
-        return this.PMVehicle //suposem que hi ha una base de dades
+        return this.id; //suposem que hi ha una base de dades
     }
     public PMVState getState() {
         return state;
@@ -47,13 +47,21 @@ public class PMVehicle {
     public void setLocation(GeographicPoint gP) {
         this.location = gP;
     }
+
+    public VehicleID getId() {
+        return id;
+    }
+
+    /**
+     * Enumeración PMVState
+     * Representa los posibles estados de un vehículo de micromovilidad.
+     */
+    enum PMVState {
+        Available, NotAvailable, UnderWay, TemporaryParking;
+    }
 }
 
-/**
- * Enumeración PMVState
- * Representa los posibles estados de un vehículo de micromovilidad.
- */
-enum PMVState {
-    Available, NotAvailable, UnderWay, TemporaryParking;
-}
+
+
+
 

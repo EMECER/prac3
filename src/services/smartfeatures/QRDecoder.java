@@ -1,5 +1,6 @@
 package services.smartfeatures;
 
+import data.GeographicPoint;
 import services.exceptions.NotCorrectFormatException;
 import micromobility.PMVehicle;
 import data.VehicleID;
@@ -40,13 +41,14 @@ public class QRDecoder implements QRDecoderInterface {
      *
      * @param qrImage la imagen del código QR.
      * @return el objeto PMVehicle correspondiente al ID decodificado.
-     * @throws CorruptedImgException si la imagen está corrupta.
+     * @throws CorruptedImgException     si la imagen está corrupta.
      * @throws NotCorrectFormatException si el formato del ID no es válido.
      */
+    @Override
     public PMVehicle getVehicle(BufferedImage qrImage) throws CorruptedImgException, NotCorrectFormatException {
-        VehicleID vehicleID = getVehicleID(qrImage);
-
-        // Crear un PMVehicle basado en el ID decodificado
-        return PMVehicle.getVehiclebyId(vehicleID);
+        VehicleID gottenID = getVehicleID(qrImage);
+        GeographicPoint location = new GeographicPoint(0, 0);
+        PMVehicle toReturn = new PMVehicle(gottenID, location);
+        return toReturn;
     }
 }

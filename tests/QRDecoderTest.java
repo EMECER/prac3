@@ -1,11 +1,13 @@
-package services.smartfeatures;
+package tests;
 
+import micromobility.PMVehicle;
 import services.exceptions.NotCorrectFormatException;
-import data.PMVehicle;
+
 import data.VehicleID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import services.exceptions.CorruptedImgException;
+import services.smartfeatures.QRDecoder;
 
 import java.awt.image.BufferedImage;
 
@@ -27,7 +29,7 @@ public class QRDecoderTest {
         // Configuración inicial para las pruebas
         qrDecoder = new QRDecoder();
         mockQRImage = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-        expectedVehicleID = new VehicleID(new int[]{1, 2, 3, 4}); // Simulación de ID esperado
+        expectedVehicleID = new VehicleID(1234); // Simulación de ID esperado
     }
 
     /**
@@ -67,9 +69,9 @@ public class QRDecoderTest {
     @Test
     public void testGetVehicle_Success() {
         assertDoesNotThrow(() -> {
-            PMVehicle result = qrDecoder.getVehicle(mockQRImage);
+            VehicleID result = qrDecoder.getVehicle(mockQRImage).getId();
             assertNotNull(result, "El objeto PMVehicle no debería ser nulo.");
-            assertEquals(expectedVehicleID, result.getVehicleID(), "El ID del vehículo en PMVehicle debería coincidir.");
+            assertEquals(expectedVehicleID, result, "El ID del vehículo en PMVehicle debería coincidir.");
         });
     }
 

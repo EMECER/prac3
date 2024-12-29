@@ -1,5 +1,6 @@
 package services.smartfeatures;
 
+import micromobility.PMVehicle;
 import services.exceptions.NotCorrectFormatException;
 import data.VehicleID;
 import java.awt.image.BufferedImage;
@@ -18,4 +19,6 @@ public interface QRDecoderInterface {
      * @throws CorruptedImgException si la imagen está corrupta o no es legible.
      */
     VehicleID getVehicleID(BufferedImage qrImage) throws CorruptedImgException, NotCorrectFormatException;
+
+    PMVehicle getVehicle(BufferedImage qrImage) throws CorruptedImgException, NotCorrectFormatException;
 }

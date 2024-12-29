@@ -7,4 +7,12 @@ public class UserAccount {
         this.username = username;
     }
 
+    public String getUsername(){
+        return this.username;
+    }
+
+    public void setUsername(String newUser){
+        this.username = newUser;
+    }
+
 }
