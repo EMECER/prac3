@@ -2,10 +2,6 @@
 package micromobility;
 
 import data.*;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import services.*;
-import services.smartfeatures.*;
 
 /**
  * Clase PMVehicle
@@ -43,13 +39,8 @@ public class PMVehicle {
     public void setLocation(GeographicPoint gP) {
         this.location = gP;
     }
+
 }
 
-/**
- * Enumeración PMVState
- * Representa los posibles estados de un vehículo de micromovilidad.
- */
-enum PMVState {
-    Available, NotAvailable, UnderWay, TemporaryParking;
-}
+
 

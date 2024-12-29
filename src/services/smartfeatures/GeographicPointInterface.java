@@ -1,3 +1,5 @@
+package services.smartfeatures;
+
 import data.GeographicPoint;
 public interface GeographicPointInterface {
  /**

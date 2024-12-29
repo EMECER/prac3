@@ -1,4 +1,4 @@
-package services;
+package services.smartfeatures;
 
 import data.*;
 import micromobility.*;
