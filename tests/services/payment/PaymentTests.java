@@ -1,6 +1,7 @@
 package services.payment;
 import data.ServiceID;
-import payment.*;
+import payment.Wallet;
+import payment.WalletPayment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import services.exceptions.NotCorrectFormatException;

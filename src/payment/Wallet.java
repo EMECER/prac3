@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Clase que representa el monedero asociado a un usuario.
  */
-class Wallet {
+public class Wallet {
     private BigDecimal balance;
 
     public Wallet(BigDecimal initialBalance) {

@@ -2,7 +2,8 @@ package payment;
 import services.exceptions.*;
 import data.ServiceID;
 import java.math.BigDecimal;
-abstract class Payment {
+
+public abstract class Payment {
     private final ServiceID serviceID;
     private final String userAccount;
 

@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Representa un pago realizado mediante el monedero de la app.
  */
-class WalletPayment extends Payment {
+public class WalletPayment extends Payment {
     private final Wallet wallet;
 
     public WalletPayment(ServiceID serviceID, String userAccount, Wallet wallet) {
