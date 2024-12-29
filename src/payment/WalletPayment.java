@@ -1,5 +1,6 @@
-package micromobility.payment;
-
+package payment;
+import services.exceptions.*;
+import data.ServiceID;
 import java.math.BigDecimal;
 /**
  * Representa un pago realizado mediante el monedero de la app.

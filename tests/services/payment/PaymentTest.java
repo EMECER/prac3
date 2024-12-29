@@ -1,7 +1,10 @@
-package micromobility.payment;
-
+package services.payment;
+import data.ServiceID;
+import payment.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import services.exceptions.NotCorrectFormatException;
+import services.exceptions.NotEnoughWalletException;
 
 import java.math.BigDecimal;
 
@@ -17,7 +20,7 @@ public class PaymentTests {
     private WalletPayment walletPayment;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws NotCorrectFormatException {
         wallet = new Wallet(new BigDecimal("100.00"));
         serviceID = new ServiceID("ABCDE12345");
         walletPayment = new WalletPayment(serviceID, "user@example.com", wallet);
@@ -27,7 +30,7 @@ public class PaymentTests {
      * Test para verificar la creación correcta de un ServiceID válido.
      */
     @Test
-    public void testServiceIDCreation_Valid() {
+    public void testServiceIDCreation_Valid() throws NotCorrectFormatException {
         ServiceID validID = new ServiceID("VALID123");
         assertEquals("VALID123", validID.getId());
     }

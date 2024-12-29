@@ -1,4 +1,6 @@
-package micromobility.payment;
+package payment;
+import services.exceptions.*;
+import data.ServiceID;
 import java.math.BigDecimal;
 abstract class Payment {
     private final ServiceID serviceID;
