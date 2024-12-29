@@ -3,6 +3,7 @@ package micromobility;
 
 import data.*;
 import java.math.BigDecimal;
+import java.security.Provider;
 import java.time.LocalDateTime;
 
 /**
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
  */
 public class JourneyService {
     // Atributos según el Modelo del Dominio
+
     private UserAccount user;
     private VehicleID vehicle;
     private StationID station;
@@ -21,6 +23,7 @@ public class JourneyService {
     private float averageSpeed;
     private float distance;
     private int duration;
+    private ServiceID service;
 
     /**
      * Constructor principal de JourneyService

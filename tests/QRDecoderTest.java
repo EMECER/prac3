@@ -1,5 +1,6 @@
 package services.smartfeatures;
 
+import data.NotCorrectFormatException;
 import data.VehicleID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,10 +20,10 @@ public class QRDecoderTest implements QRDecoderInterface {
     private VehicleID mockVehicleID;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws NotCorrectFormatException {
         // Configura datos simulados para las pruebas
         mockQRImage = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
-        mockVehicleID = new VehicleID("TEST123");
+        mockVehicleID = new VehicleID(new int[]{1234});
     }
 
     @Override
