@@ -41,15 +41,14 @@ public class JourneyRealizeHandler {
     }
 
     // Eventos de entrada relacionados con la interfaz de usuario
-    public void scanQR(BufferedImage qrImage) throws ConnectException, InvalidPairingArgsException, CorruptedImgException, PMVNotAvailException, ProceduralException {
+    public void scanQR(BufferedImage qrImage,UserAccount user) throws ConnectException, InvalidPairingArgsException, CorruptedImgException, PMVNotAvailException, ProceduralException {
         try {
             // Decodificar el QR y verificar disponibilidad
-            VehicleID vehicleID = qrDecoder.getVehicleID(qrImage);
+            PMVehicle vehicle = qrDecoder.getVehicle(qrImage);
             server.checkPMVAvail(vehicleID);
 
             // Crear instancia del vehículo y la jornada
-            vehicle = vehicleID.getID()// Si no se especifica otro método, creamos una instancia
-            journey = new JourneyService(vehicle);
+            journey = new JourneyService(user,vehicle);
 
             // Actualizar estado del vehículo
             vehicle.setNotAvailb();

@@ -15,7 +15,6 @@ public class JourneyService implements  JourneyServiceInterface{
 
     private UserAccount user;
     private VehicleID vehicle;
-    private StationID station;
     private GeographicPoint startLocation;
     private GeographicPoint endLocation;
     private LocalDateTime startTime;
@@ -29,14 +28,12 @@ public class JourneyService implements  JourneyServiceInterface{
      * Constructor principal de JourneyService
      * @param user El usuario asociado al trayecto
      * @param vehicle El vehículo utilizado
-     * @param station La estación de inicio
      * @param startLocation La ubicación inicial del trayecto
      */
-    public JourneyService(UserAccount user, VehicleID vehicle, StationID station, GeographicPoint startLocation) {
+    public JourneyService(UserAccount user, PMVehicle vehicle) {
         this.user = user;
         this.vehicle = vehicle;
-        this.station = station;
-        this.startLocation = startLocation;
+        this.startLocation = vehicle.getLocation;
     }
 
     /**
@@ -69,10 +66,6 @@ public class JourneyService implements  JourneyServiceInterface{
 
     public VehicleID getVehicle() {
         return vehicle;
-    }
-
-    public StationID getStation() {
-        return station;
     }
 
     public GeographicPoint getStartLocation() {
