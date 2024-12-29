@@ -1,10 +1,13 @@
+package dataTests;
+
 import data.NotCorrectFormatException;
 import data.StationID;
+import dataTests.DataNotCorrectInit;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class stationIDNotCorrectNumericPart implements DataNotCorrectInit{
+public class stationIDNotCorrectNumericPart implements DataNotCorrectInit {
     private StationID notCorrectNumeric;
     @Override
     @Test

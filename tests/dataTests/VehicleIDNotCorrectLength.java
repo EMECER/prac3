@@ -1,6 +1,8 @@
+package dataTests;
+
 import data.NotCorrectFormatException;
-import data.StationID;
 import data.VehicleID;
+import dataTests.DataNotCorrectInit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

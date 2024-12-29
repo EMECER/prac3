@@ -1,10 +1,13 @@
+package dataTests;
+
 import data.NotCorrectFormatException;
 import data.StationID;
+import dataTests.DataNotCorrectInit;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class StationIDDoesNotStartWithALetter implements DataNotCorrectInit{
+public class StationIDDoesNotStartWithALetter implements DataNotCorrectInit {
 
     private StationID notLetterFirstPos;
     @Test

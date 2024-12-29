@@ -1,3 +1,5 @@
+package dataTests;
+
 import data.NotCorrectFormatException;
 
 public interface DataNotCorrectInit{
